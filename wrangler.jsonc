@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "url-shortener",
+  "main": "src/worker/index.ts",
+  "compatibility_date": "2026-01-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "none",
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "STORE", "class_name": "LinkStore" }],
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["LinkStore"] }],
+  "vars": {
+    "PUBLIC_ORIGIN": "https://l.bl.je",
+    "ACCESS_TEAM_DOMAIN": "",
+    "ACCESS_AUD": "",
+    "RETENTION_DAYS": "365",
+  },
+}

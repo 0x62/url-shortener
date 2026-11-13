@@ -1,0 +1,4 @@
+# Local development only. Never enable DEV_AUTH_BYPASS in Cloudflare.
+DEV_AUTH_BYPASS=true
+# Generate a random secret of at least 32 characters for local use.
+ANALYTICS_SECRET=local-development-only-change-before-deployment-12345
