@@ -1,0 +1,287 @@
+/* Global tokens, typography, shared controls, and feedback. */
+
+@theme {
+  --font-sans:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+:root {
+  font-family: var(--font-sans);
+  color: #263248;
+  background: #f7f8fb;
+  font-synthesis: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button,
+input,
+select,
+a {
+  outline-offset: 3px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid #4169e1;
+}
+
+svg {
+  flex-shrink: 0;
+}
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 1.4px;
+  color: #8892a3;
+  margin: 0 0 9px;
+}
+
+h1 {
+  font-size: 30px;
+  letter-spacing: -1px;
+  line-height: 1.2;
+  margin: 0;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 15px;
+  font-weight: 650;
+  margin: 0;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 650;
+  margin: 15px 0 8px;
+}
+
+.subtitle {
+  color: #7c8797;
+  margin: 10px 0 0;
+  font-size: 14px;
+}
+
+.button {
+  border: 1px solid transparent;
+  border-radius: 7px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 9px 16px;
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.primary {
+  background: #4169e1;
+  color: white;
+  box-shadow: 0 2px 3px #4169e118;
+}
+
+.primary:hover {
+  background: #365bc9;
+}
+
+.secondary {
+  background: white;
+  border-color: #dfe4ed;
+  color: #596578;
+}
+
+.secondary:hover {
+  background: #f7f8fb;
+}
+
+.panel {
+  background: white;
+  border: 1px solid #e4e8f0;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px #22304403;
+}
+
+.muted {
+  color: #8a94a4;
+}
+
+.small {
+  font-size: 11px;
+}
+
+.destination {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #7a8699;
+  font-size: 12px;
+  max-width: 480px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.destination:hover {
+  color: #4169e1;
+}
+
+.destination svg {
+  width: 12px;
+  height: 12px;
+  opacity: 0.5;
+}
+
+.right {
+  text-align: right;
+}
+
+.metric {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.icon-button {
+  border: 0;
+  background: transparent;
+  color: #939dad;
+  padding: 6px;
+  border-radius: 5px;
+}
+
+.icon-button:hover {
+  background: #f0f3fa;
+  color: #4169e1;
+}
+
+.copy-wrap {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+}
+
+.copy-status {
+  font-size: 10px;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  color: #4169e1;
+  white-space: nowrap;
+}
+
+code {
+  font-size: 11px;
+  background: #edf1f8;
+  padding: 2px 4px;
+  border-radius: 3px;
+  color: #61708a;
+}
+
+.loading {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  min-height: 250px;
+  color: #8a95a5;
+  font-size: 13px;
+}
+
+.spinner {
+  width: 17px;
+  height: 17px;
+  border: 2px solid #e1e7f5;
+  border-top-color: #4169e1;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-box {
+  background: #fff6f4;
+  border: 1px solid #f2d9d3;
+  border-radius: 8px;
+  padding: 25px;
+  color: #9b574b;
+  font-size: 13px;
+}
+
+.error-box p {
+  margin-top: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 720px) {
+  h1 {
+    font-size: 26px;
+  }
+  .destination {
+    max-width: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

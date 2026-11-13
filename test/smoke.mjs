@@ -22,7 +22,7 @@ assert.deepEqual(results.map((r) => r.status).sort(), [201, 409, 409, 409]);
 const html = await (
   await fetch(`${origin}/${slug}/candidate?ref=email&campaign=ignored`)
 ).text();
-const token = JSON.parse(html.match(/\.\.\.(\{"id".*?\}),w:screen/)[1]);
+const token = JSON.parse(html.match(/const token = (\{.*?\});/)[1]);
 assert.equal(
   (await post("/_collect", { ...token, w: 1920, h: 1080 })).status,
   204,

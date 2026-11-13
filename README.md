@@ -1,6 +1,6 @@
 # l.bl.je
 
-A small Cloudflare Workers URL shortener with a React/TypeScript/Tailwind analytics dashboard, Cloudflare Access authentication and a SQLite-backed Durable Object. No Next.js server or external database is required.
+A small Hono-based Cloudflare Workers URL shortener with a React/TypeScript/Tailwind analytics dashboard, Cloudflare Access authentication and a SQLite-backed Durable Object. No Next.js server or external database is required.
 
 ## Features
 
@@ -51,6 +51,8 @@ Raw hit retention defaults to 365 days (configurable 1–365). A daily Durable O
 
 ## Architecture and limits
 
+See [the architecture guide](docs/architecture.md) for module ownership, request flows and the Hono-versus-Express decision.
+
 One Durable Object serializes the directory and analytics writes, using parameterized SQLite queries and time/link indexes. This deliberately suits a personal CV/link shortener, not a public multi-tenant service. All campaigns are derived from stored events. At high traffic volume, move analytics to per-link objects or a separate analytics service; do not assume Workers Free offers unlimited writes, storage or requests. Retention deletes and aggregate scans count toward resource use. [Workers pricing](https://developers.cloudflare.com/workers/platform/pricing/) and [DO limits](https://developers.cloudflare.com/durable-objects/platform/limits/) are authoritative.
 
 Analytics storage failure falls back to an untracked redirect so a transient measurement failure does not strand visitors. Missing links return 404, invalid slugs cannot collide with admin/API routes, and destinations cannot redirect back to this origin. Link creation is atomic and rejects duplicates. An authenticated write also requires a same-origin request to reduce CSRF risk. The initial version supports creation and viewing only; no destructive edit/delete operations are exposed.
@@ -59,6 +61,6 @@ Never commit `.dev.vars`, `.env` or `.wrangler` state. No Cloudflare credentials
 
 ## Validation
 
-The initial implementation passed TypeScript, 11 unit/security tests, a production UI build, and a Wrangler deployment dry-run (no deployment). A local Workerd/SQLite smoke test passed concurrent duplicate creation, campaign/ref attribution, single-count enrichment/replay protection, filters, invalid-date handling, and admin asset serving. Re-run it against local Wrangler with `node test/smoke.mjs`; it creates uniquely named local test links.
+The initial implementation passed TypeScript, the unit/security test suite, a production UI build, and a Wrangler deployment dry-run (no deployment). A local Workerd/SQLite smoke test passed concurrent duplicate creation, campaign/ref attribution, single-count enrichment/replay protection, filters, invalid-date handling, and admin asset serving. Re-run it against local Wrangler with `node test/smoke.mjs`; it creates uniquely named local test links.
 
 Live Cloudflare Access login, custom-domain routing and production geolocation require the above account setup and have not been verified. Automated visual/browser QA was blocked in the build environment by Chromium's socket restriction; responsive styling is implemented but the finished page still needs browser review before deployment.
